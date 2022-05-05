@@ -1,0 +1,17 @@
+	string removeDuplicates(string str) {
+	    // code here
+	    
+	    unordered_map<char,int>m;
+	    string ans="";
+	    
+	    for(auto ch:str){
+	        
+	        if(m.find(ch)==m.end()){
+	            ans.push_back(ch);
+	            m[ch]=1;
+	        }
+	        
+	    }
+	    
+	    return ans;
+	}
