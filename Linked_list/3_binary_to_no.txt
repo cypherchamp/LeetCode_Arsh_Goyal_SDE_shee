@@ -1,0 +1,37 @@
+ ListNode *revList(ListNode*head){
+        if(head==NULL){
+            return NULL;
+        }
+        
+        if(head->next==NULL){
+            return head;
+        }
+        
+        ListNode* newhead=revList(head->next);
+        
+       ListNode* Next=head->next;
+    Next->next=head;
+        head->next=NULL;
+        
+        return newhead;
+    }
+    int getDecimalValue(ListNode* head) {
+        if(head==NULL)return 0;
+        
+        head=revList(head);
+        ListNode *temp=head;
+int ans;
+        ans=(temp->val==1)?1:0;
+        int exp=2;
+        if(temp->next==NULL)return ans;
+        temp=temp->next;
+        while(temp!=NULL){
+            if(temp->val==1){
+              ans+=exp; 
+            }
+            exp*=2;
+            temp=temp->next;
+        }
+        return ans;
+    }
+};
