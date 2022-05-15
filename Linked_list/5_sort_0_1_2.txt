@@ -1,0 +1,4 @@
+  while(zero--){
+            temp->data=0;
+            temp=temp->next;
+        }
