@@ -1,0 +1,75 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int len(ListNode *head){
+        int cnt=0;
+        ListNode *temp=head;
+        while(temp!=NULL){
+            temp=temp->next;
+            cnt++;
+        }
+        return cnt;
+    }
+    void pushInSt(stack<int>&st,ListNode *head){
+        ListNode *temp=head;
+        while(temp!=NULL){
+st.push(temp->val);
+            temp=temp->next;
+        }
+    }
+    
+    ListNode* reverseList(ListNode* head) {
+        if(head==NULL || head->next==NULL)return head;
+        
+        ListNode *newHead=reverseList(head->next);
+        ListNode *Next=head->next;
+        Next->next=head;
+        head->next=NULL;
+        return newHead;
+        
+    }
+    
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        
+        int L1=len(l1);
+        int L2=len(l2);
+    
+        ListNode *newHead=new ListNode(0);
+        ListNode *temp=newHead;
+        stack<int>st1;
+        stack<int>st2;
+        pushInSt(st1,l1);
+        pushInSt(st2,l2);
+        int carry=0;
+        while(!st1.empty() || !st2.empty() || carry!=0){
+
+            int sum=0;
+            if(!st1.empty()){
+                sum+=st1.top();
+                st1.pop();
+            }
+            
+            if(!st2.empty()){
+                sum+=st2.top();
+                st2.pop();
+            }
+            
+            sum+=carry;
+            int v=sum%10;
+            carry=sum/10;
+            
+            temp->next=new ListNode(v);
+            temp=temp->next;
+        }
+        return reverseList(newHead->next);
+    }
+};
